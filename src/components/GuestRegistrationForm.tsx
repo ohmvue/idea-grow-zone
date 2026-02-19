@@ -87,7 +87,22 @@ export function GuestRegistrationForm() {
     },
   });
 
-  function onSubmit(values: FormValues) {
+  async function onSubmit(values: FormValues) {
+    await fetch("https://hostel-api.ohmvuegrupo.workers.dev/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nome: values.nomeCompleto,
+        documento: values.documento,
+        checkin: values.checkin,
+        checkout: values.checkout,
+        valor: values.valorReserva,
+        pagamento: values.formaPagamento,
+      }),
+    });
+
     const novoHospede: Hospede = {
       id: crypto.randomUUID(),
       nomeCompleto: values.nomeCompleto,
